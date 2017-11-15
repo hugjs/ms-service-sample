@@ -1,0 +1,42 @@
+service_node:
+    basic:
+        app: sample
+        app_version: 1.0.0
+        service: user
+        service_version: 0.0.1
+        weight: 10
+        activate: 1
+    storage:
+        name: zk
+        options:
+            zk:
+                url: '192.168.8.3:2182,192.168.8.3:2183,192.168.8.3:2184'
+                options:
+                    sessionTimeout: 2000 # 必填，决定临时节点失效删除周期
+                timeout: 3000
+            root: /TEST_MICRO/services
+# server configurations
+server:
+    protocal: http
+    #host: 
+    port: 20003
+    root: /
+reg_svc:
+    path: 
+        reg: http://localhost:20001/regist
+        activate: http://localhost:20001/activate
+# log configurations
+log:
+    appenders:
+        console:
+            type: console
+    categories: 
+        default: 
+            appenders: 
+                - console
+            level: debug
+# system paths
+path:
+    controller: ./src/controller
+    model: ./src/model
+    router: ./src/router
